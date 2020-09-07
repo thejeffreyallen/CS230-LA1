@@ -7,6 +7,7 @@ public class Program {
 	public static String[] type;
 	public static String[] premise;
 	public static String[] conclusion;
+  public static String[] auth;
   public static boolean auto = false;
   public static String mode = "";
 			
@@ -16,6 +17,8 @@ public class Program {
 		type = new String[]{"Modus Ponens", "Modus Tollens", "Process of Elimination", "Chain Rule", "Affirming the Consequent", "Denying the Antecedent", "Begging the Question"}; 
 		premise = new String[]{"I study hard", "you have a current password", "it is raining", "it is after 10PM", "the weather is nice", "the dog is barking", "the house is on fire", "you work hard", "you stay inside all day", "you participate in the race", "you take the new position"};
 		conclusion = new String[]{"I will get an A", "you can log on to the network", "the road will get wet", "the store will be closed", "Joe will take a walk", "the neighbors will get mad", "everything is ruined", "you will pass the test", "you will get the job", "long distance space travel is possibe", "the stock market will crash"};
+    auth = new String[]{"The boss says", "My father told me that", "According to the news", "According to the internet", "Scientists agree that", "Elon Musk assures us that", "It has been proven that"};
+
 		
 	
 		while(running) {
@@ -43,6 +46,7 @@ public class Program {
 				else
 					System.err.println("You entered invalid input, please try again");
         
+        String autho = auth[rand.nextInt(auth.length)];
         if(Integer.parseInt(mode) == 1)
           auto = true; 
         else
@@ -60,7 +64,7 @@ public class Program {
 					  conc = scan.nextLine();
           }
           System.out.println("\nGenerated argument: ");
-					System.out.println("\n\"If "+prem+", then "+conc+". " +prem+", therefore, "+conc+".\"");
+					System.out.println("\n\""+auth[rand.nextInt(auth.length)]+", if "+prem+", then "+conc+". " +prem+", therefore, "+conc+".\"");
           end();
 				}
         if(Integer.parseInt(selection) == 2){
@@ -76,7 +80,7 @@ public class Program {
 					  conc = scan.nextLine();
           }
           System.out.println("\nGenerated argument: ");
-					System.out.println("\n\"If "+prem+", then "+conc+". It is not the case that " +prem+", therefore, it is not the case that "+conc+".\"");
+					System.out.println("\n\""+auth[rand.nextInt(auth.length)]+", if "+prem+", then "+conc+". It is not the case that " +prem+", therefore, it is not the case that "+conc+".\"");
           end();
         }
         if(Integer.parseInt(selection) == 3){
@@ -100,10 +104,10 @@ public class Program {
           
           int flip = rand.nextInt(2);
           if(flip == 1){
-            System.out.println("\n\"It is either the case that "+prem+" or, "+prem2+". It is not the case that " +prem+", therefore, "+prem2+".\"");
+            System.out.println("\n\""+auth[rand.nextInt(auth.length)]+", it is either the case that "+prem+" or, "+prem2+". It is not the case that " +prem+", therefore, "+prem2+".\"");
           }
           else{
-            System.out.println("\"\nIt is either the case that "+prem+" or, "+prem2+". It is not the case that " +prem2+", therefore, "+prem+".\"");
+            System.out.println("\"\n"+auth[rand.nextInt(auth.length)]+", it is either the case that "+prem+" or, "+prem2+". It is not the case that " +prem2+", therefore, "+prem+".\"");
           }
           end();
         }
@@ -131,7 +135,7 @@ public class Program {
             prem3 = scan.nextLine();
           }
           System.out.println("\nGenerated argument: ");
-          System.out.println("\n\"If "+prem+", then "+prem2+". If "+prem2+", then "+prem3+". "+prem+", therefore, "+prem3+".\"");
+          System.out.println("\n\""+auth[rand.nextInt(auth.length)]+", if "+prem+", then "+prem2+". If "+prem2+", then "+prem3+". "+prem+", therefore, "+prem3+".\"");
           end();
         }
         if(Integer.parseInt(selection) == 5){
@@ -147,7 +151,7 @@ public class Program {
 					  conc = scan.nextLine();
           }
           System.out.println("\nGenerated argument: ");
-					System.out.println("\n\"If "+prem+", then "+conc+". " +conc+", therefore, "+prem+".\"");
+					System.out.println("\n\""+auth[rand.nextInt(auth.length)]+", if "+prem+", then "+conc+". " +conc+", therefore, "+prem+".\"");
           end();
         }
         if(Integer.parseInt(selection) == 6){
@@ -163,7 +167,7 @@ public class Program {
 					  conc = scan.nextLine();
           }
           System.out.println("\nGenerated argument: ");
-					System.out.println("\n\"If "+prem+", then "+conc+". It is not the case that " +conc+", therefore, it is not the case that "+prem+".\"");
+					System.out.println("\n\""+auth[rand.nextInt(auth.length)]+", if "+prem+", then "+conc+". It is not the case that " +conc+", therefore, it is not the case that "+prem+".\"");
           end();
         }
         if(Integer.parseInt(selection) == 7){
