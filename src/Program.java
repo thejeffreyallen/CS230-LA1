@@ -14,8 +14,8 @@ public class Program {
 		Random rand = new Random();
 		scan = new Scanner(System.in);
 		type = new String[]{"Modus Ponens", "Modus Tollens", "Process of Elimination", "Chain Rule", "Affirming the Consequent", "Denying the Antecedent", "Begging the Question"}; 
-		premise = new String[]{"I study hard", "you have a current password", "it is raining", "it is after 10PM", "the weather is nice", "the dog is barking"};
-		conclusion = new String[]{"I will get an A", "you can log on to the network", "the road will get wet", "the store will be closed", "Joe will take a walk", "the neighbors  will get mad"};
+		premise = new String[]{"I study hard", "you have a current password", "it is raining", "it is after 10PM", "the weather is nice", "the dog is barking", "the house is on fire", "you work hard", "you stay inside all day", "you participate in the race", "you take the new position"};
+		conclusion = new String[]{"I will get an A", "you can log on to the network", "the road will get wet", "the store will be closed", "Joe will take a walk", "the neighbors will get mad", "everything is ruined", "you will pass the test", "you will get the job", "long distance space travel is possibe", "the stock market will crash"};
 		
 	
 		while(running) {
@@ -115,12 +115,12 @@ public class Program {
           String prem2 = "";
           String prem3 = "";
           if(auto){
-            while(prem1int == prem2int || prem1int == prem3int || prem2int == prem3int){
+            while(prem1int == prem3int){
               prem2int = rand.nextInt(premise.length);
               prem3int = rand.nextInt(premise.length);
             }
             prem = premise[prem1int];
-            prem2 = premise[prem2int];
+            prem2 = conclusion[prem2int];
             prem3 = premise[prem3int];
           }else{
             System.out.print("\nEnter a premise: ");
