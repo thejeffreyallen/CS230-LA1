@@ -38,7 +38,7 @@ public class Program {
 					  
             while(mode == ""){
               System.out.println("\nYou have selected: "+type[Integer.parseInt(selection)-1]);
-              System.out.print("\n1. Automatic\n2. User input:\n\nSelect mode: ");
+              System.out.print("\n1. Automatic:\n2. User input:\n\nSelect mode: ");
 				      mode = scan.next();
               if(Integer.parseInt(mode) != 1 && Integer.parseInt(mode) != 2) {
                 System.err.println("\nSelection must be within range\n");
