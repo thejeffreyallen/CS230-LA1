@@ -23,6 +23,7 @@ public class Program {
 	
 		while(running) {
 			try {
+        mode = "";
         menu();
 				System.out.print("\nSelect argument: ");
 				String selection = scan.next();
@@ -34,9 +35,19 @@ public class Program {
 					System.err.println("\nSelection must be within range\n");
 				}
 				else if(Integer.parseInt(selection) >= 1 && Integer.parseInt(selection) <= 7){
-					System.out.println("\nYou have selected: "+type[Integer.parseInt(selection)-1]);
-          System.out.print("\n1. Automatic\n2. User input:\n\nSelect mode: ");
-				  mode = scan.next(); 
+					  
+            while(mode == ""){
+              System.out.println("\nYou have selected: "+type[Integer.parseInt(selection)-1]);
+              System.out.print("\n1. Automatic\n2. User input:\n\nSelect mode: ");
+				      mode = scan.next();
+              if(Integer.parseInt(mode) != 1 && Integer.parseInt(mode) != 2) {
+                System.err.println("\nSelection must be within range\n");
+                mode = "";
+                end();
+                continue;
+              }
+            }
+            
           scan.nextLine();
         }
 				else if(Integer.parseInt(selection) == 8) {
