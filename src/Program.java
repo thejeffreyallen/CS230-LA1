@@ -1,17 +1,27 @@
+/**
+/ @Author: Jeff Allen
+/ CS230 - LA1 challenge A
+/
+*/
+
 import java.util.Random;
 import java.util.Scanner;
 
 public class Program {
-	static boolean running = true;
-	public static Scanner scan;
-	public static String[] type;
-	public static String[] premise;
-	public static String[] conclusion;
-  public static String[] auth;
-  public static boolean auto = false;
-  public static String mode = "";
+	static boolean running = true; //Used for the main loop
+	public static Scanner scan; // Read in user input
+	public static String[] type; // Used to store the 7 types of arguments as Strings
+	public static String[] premise; // Used to store the automatic premises
+	public static String[] conclusion; // Used to store the automatic conclusions
+  public static String[] auth; // Used to store the authority aspect of the arguments
+  public static boolean auto = false; // Was auto selected?
+  public static String mode = ""; // 
 			
+  /**
+  / Main method - Contains the "game" loop
+  */    
 	public static void main(String[] args) {
+    //Instantiate all variables
 		Random rand = new Random();
 		scan = new Scanner(System.in);
 		type = new String[]{"Modus Ponens", "Modus Tollens", "Process of Elimination", "Chain Rule", "Affirming the Consequent", "Denying the Antecedent", "Begging the Question"}; 
@@ -21,14 +31,14 @@ public class Program {
 
 		
 	
-		while(running) {
+		while(running) { // Main loop
 			try {
         mode = "";
         menu();
 				System.out.print("\nSelect argument: ");
 				String selection = scan.next();
         System.out.print("\033[H\033[2J");  
-        System.out.flush();
+        System.out.flush(); // clear the console
         
 				if(Integer.parseInt(selection) < 1 || Integer.parseInt(selection) > 8)
 				{
@@ -36,7 +46,7 @@ public class Program {
 				}
 				else if(Integer.parseInt(selection) >= 1 && Integer.parseInt(selection) <= 7){
 					  
-            while(mode == ""){
+            while(mode == ""){ // inner loop to ensure that proper input was entered
               System.out.println("\nYou have selected: "+type[Integer.parseInt(selection)-1]);
               System.out.print("\n1. Automatic:\n2. User input:\n\nSelect mode: ");
 				      mode = scan.next();
@@ -48,9 +58,9 @@ public class Program {
               }
             }
             
-          scan.nextLine();
+          scan.nextLine(); // Clear the scanner for next input
         }
-				else if(Integer.parseInt(selection) == 8) {
+				else if(Integer.parseInt(selection) == 8) { // Quit
 					System.out.println("Goodbye");
 					System.exit(1);
 				}
@@ -62,13 +72,13 @@ public class Program {
           auto = true; 
         else
           auto = false;
-				if(Integer.parseInt(selection) == 1) {
+				if(Integer.parseInt(selection) == 1) { // Modus Ponens
           String prem = "";
 					String conc = "";
-          if(auto){
+          if(auto){ // if Auto was selected
             prem = premise[rand.nextInt(premise.length)];
 					  conc = conclusion[rand.nextInt(conclusion.length)];
-          }else{
+          }else{ // if Manual was selected
             System.out.print("\nEnter a premise: ");
             prem = scan.nextLine();
             System.out.print("\nEnter a conclusion: ");
@@ -78,13 +88,13 @@ public class Program {
 					System.out.println("\n\""+auth[rand.nextInt(auth.length)]+", if "+prem+", then "+conc+". " +prem+", therefore, "+conc+".\"");
           end();
 				}
-        if(Integer.parseInt(selection) == 2){
+        if(Integer.parseInt(selection) == 2){ // Modus Tollens
           String prem = "";
 					String conc = "";
-          if(auto){
+          if(auto){ // if Auto was selected
             prem = premise[rand.nextInt(premise.length)];
 					  conc = conclusion[rand.nextInt(conclusion.length)];
-          }else{
+          }else{ // if Manual was selected
             System.out.print("\nEnter a premise: ");
             prem = scan.nextLine();
             System.out.print("\nEnter a conclusion: ");
@@ -94,18 +104,18 @@ public class Program {
 					System.out.println("\n\""+auth[rand.nextInt(auth.length)]+", if "+prem+", then "+conc+". It is not the case that " +prem+", therefore, it is not the case that "+conc+".\"");
           end();
         }
-        if(Integer.parseInt(selection) == 3){
+        if(Integer.parseInt(selection) == 3){ // Process of Elimination
           int prem1int = rand.nextInt(premise.length);
           int prem2int = rand.nextInt(premise.length);
           String prem = "";
           String prem2 = "";
-          if(auto){
+          if(auto){ // if Auto was selected
             while(prem1int == prem2int){
               prem2int = rand.nextInt(premise.length);
             }
             prem = premise[prem1int];
             prem2 = premise[prem2int];
-          }else{
+          }else{ // if Manual was selected
             System.out.print("\nEnter a premise: ");
             prem = scan.nextLine();
             System.out.print("\nEnter another premise: ");
@@ -122,14 +132,14 @@ public class Program {
           }
           end();
         }
-        if(Integer.parseInt(selection) == 4){
+        if(Integer.parseInt(selection) == 4){ // Chain rule
           int prem1int = rand.nextInt(premise.length);
           int prem2int = rand.nextInt(premise.length);
           int prem3int = rand.nextInt(premise.length);
           String prem = "";
           String prem2 = "";
           String prem3 = "";
-          if(auto){
+          if(auto){ // if Auto was selected
             while(prem1int == prem3int){
               prem2int = rand.nextInt(premise.length);
               prem3int = rand.nextInt(premise.length);
@@ -137,7 +147,7 @@ public class Program {
             prem = premise[prem1int];
             prem2 = conclusion[prem2int];
             prem3 = premise[prem3int];
-          }else{
+          }else{ // if Manual was selected
             System.out.print("\nEnter a premise: ");
             prem = scan.nextLine();
             System.out.print("\nEnter another premise: ");
@@ -149,13 +159,13 @@ public class Program {
           System.out.println("\n\""+auth[rand.nextInt(auth.length)]+", if "+prem+", then "+prem2+". If "+prem2+", then "+prem3+". "+prem+", therefore, "+prem3+".\"");
           end();
         }
-        if(Integer.parseInt(selection) == 5){
+        if(Integer.parseInt(selection) == 5){ // Affirming the Consequent
           String prem = "";
 					String conc = "";
-          if(auto){
+          if(auto){ // if Auto was selected
             prem = premise[rand.nextInt(premise.length)];
 					  conc = conclusion[rand.nextInt(conclusion.length)];
-          }else{
+          }else{ // if Manual was selected
             System.out.print("\nEnter a premise: ");
             prem = scan.nextLine();
             System.out.print("\nEnter a conclusion: ");
@@ -165,13 +175,13 @@ public class Program {
 					System.out.println("\n\""+auth[rand.nextInt(auth.length)]+", if "+prem+", then "+conc+". " +conc+", therefore, "+prem+".\"");
           end();
         }
-        if(Integer.parseInt(selection) == 6){
+        if(Integer.parseInt(selection) == 6){ //Denying the Antecedent
           String prem = "";
 					String conc = "";
-          if(auto){
+          if(auto){ // if Auto was selected
             prem = premise[rand.nextInt(premise.length)];
 					  conc = conclusion[rand.nextInt(conclusion.length)];
-          }else{
+          }else{ // if Manual was selected
             System.out.print("\nEnter a premise: ");
             prem = scan.nextLine();
             System.out.print("\nEnter a conclusion: ");
@@ -181,11 +191,11 @@ public class Program {
 					System.out.println("\n\""+auth[rand.nextInt(auth.length)]+", if "+prem+", then "+conc+". It is not the case that " +conc+", therefore, it is not the case that "+prem+".\"");
           end();
         }
-        if(Integer.parseInt(selection) == 7){
+        if(Integer.parseInt(selection) == 7){ // Begging the Question
           String prem = "";
-          if(auto){
+          if(auto){ // if Auto was selected
             prem = premise[rand.nextInt(premise.length)];
-          }else{
+          }else{ // if Manual was selected
             System.out.print("\nEnter a premise: ");
             prem = scan.nextLine();
           }
@@ -193,7 +203,7 @@ public class Program {
 					System.out.println("\n\""+prem+", therefore, "+prem+".\"");
           end();
         }
-			}catch(Exception e) {
+			}catch(Exception e) { // Handle any input errors here
 				System.err.println("\nPlease select a valid argument\n" + e.getMessage());
 			}
 			
@@ -201,6 +211,9 @@ public class Program {
 		
 	}
 	
+  /**
+  / Menu method - Print the menu to the console
+  */
 	public static void menu() {
 		System.out.println("\nPlease select which type of argument to generate by entering the associated number.\n");
 		for(int i = 0; i < type.length; i++) {
@@ -209,6 +222,10 @@ public class Program {
 		System.out.println("8. Quit");
 	}
 
+  /**
+  / End method - After an argument is generated, this method is called to
+  /              prompt the user to continue and clears the console
+  */
   public static void end(){
     try{
       System.out.println("\nPress Enter key to continue: ");
